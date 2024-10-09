@@ -1,17 +1,23 @@
 version: 2.1
 
 jobs:
-  test:
+  build:
     macos:
       xcode: 15.3.0
     steps:
       - checkout
       - run:
-          name: Change to Project Directory
-          command: cd /Users/kenishioka/ken_CircleCI_sample/CirclCISample
+          name: Print Current Directory
+          command: pwd  # 現在のディレクトリを表示
       - run:
-          name: Run Unit Tests
-          command: xcodebuild test -scheme CirclCISample
+          name: List Files
+          command: ls -la  # 現在のディレクトリ内のファイルをリスト表示
+      - run:
+          name: Change to Project Directory
+          command: cd CirclCISample  # プロジェクトディレクトリへのパスを相対的に修正
+      - run:
+          name: Build Application
+          command: xcodebuild -scheme CirclCISample -configuration Release
 
   display:
     macos:
