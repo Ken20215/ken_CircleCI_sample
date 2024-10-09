@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Change to Project Directory
+          command: cd /Users/kenishioka/ken_CircleCI_sample/CirclCISample
+      - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme CirclCISample
 
