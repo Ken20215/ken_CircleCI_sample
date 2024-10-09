@@ -1,23 +1,17 @@
 version: 2.1
 
 jobs:
-  build:
+  test:
     macos:
       xcode: 15.3.0
     steps:
       - checkout
       - run:
-          name: Print Current Directory
-          command: pwd  # 現在のディレクトリを表示
-      - run:
-          name: List Files
-          command: ls -la  # 現在のディレクトリ内のファイルをリスト表示
-      - run:
           name: Change to Project Directory
-          command: cd CirclCISample  # プロジェクトディレクトリへのパスを相対的に修正
+          command: cd /Users/kenishioka/ken_CircleCI_sample
       - run:
-          name: Build Application
-          command: xcodebuild -scheme CirclCISample -configuration Release
+          name: Run Unit Tests
+          command: xcodebuild test -scheme CirclCISample
 
   display:
     macos:
@@ -29,9 +23,9 @@ jobs:
           command: echo "Hello, World!"
 
 workflows:
-  test_display_workflow:
+  test_display_workflow:  # ワークフロー名を設定
     jobs:
-      - test
-      - display:
+      - test  # testジョブを実行
+      - display:  # displayジョブを実行
           requires:
-            - test
+            - test  # testジョブが成功した後にdisplayジョブを実行
